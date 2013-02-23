@@ -1,5 +1,5 @@
 import os
-#import Image
+import Image
 
 from formalchemy import Column
 from sqlalchemy import (
