@@ -6,7 +6,7 @@
         <script src ="${request.static_url('blogpy:static/js/underscore-min.js')}"></script>
         <script src ="${request.static_url('blogpy:static/js/utilities.js')}"></script>
         <script>
-##        var X_CSRF_TOKEN = '${csrf_token}';
+        var X_CSRF_TOKEN = '${csrf_token}';
         </script>
     </head>
     <body>

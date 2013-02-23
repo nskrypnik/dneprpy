@@ -5,7 +5,16 @@
     <h1>Hello DneprPy!</h1>
 </div>
 
-<li><a href="${request.route_url('addpost')}">Add new post</a></li>
+<ul class="nav nav-pills">
+
+%if request.user:
+    <li><a href="${request.route_url('addpost')}">Add new post</a></li>
+    <li><a href="${request.route_url('apex_logout')}">Logout</a></li>
+%else:
+    <li><a href="${request.route_url('apex_login')}">Login</a></li>
+    <li><a href="${request.route_url('apex_register')}">Register</a></li>
+%endif
+</ul>
 
 
 <div class="poststream">
@@ -22,11 +31,11 @@
         ${post.text}
     </p>
 
-##    %if post.user:
-##        <p>
-##            <b>Author:</b> ${post.user.login}
-##        </p>
-##    %endif
+    %if post.user:
+        <p>
+            <b>Author:</b> ${post.user.login}
+        </p>
+    %endif
 
   </div>
 </div>

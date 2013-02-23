@@ -12,7 +12,7 @@ from sqlalchemy import (
     )
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
-#from apex.models import AuthUser
+from apex.models import AuthUser
 
 from sqlalchemy.orm import (
     scoped_session,
@@ -41,6 +41,9 @@ class BlogPost(Base):
     text = Column(Text)
     image = Column(String(1024))
     date = Column(DateTime, default=func.now())
+    user_id = Column(Integer, ForeignKey(AuthUser.id), index=True)
+    user = relationship(AuthUser, backref=backref('posts', uselist=False))
+
 
     def get_thumb(self):
         thumb_path = self.image.split('/')

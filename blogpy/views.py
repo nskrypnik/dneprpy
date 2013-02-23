@@ -15,8 +15,7 @@ from .models import (
 
 def blogpost_form_factory(model, session=None, request=None):
     form = FieldSet(model, session=session, request=request)
-    #exclude = [form.user_id, form.user, form.date]
-    exclude = [form.date]
+    exclude = [form.user_id, form.user, form.date]
     form.configure(exclude=exclude,
             options=[
                 form.text.textarea(),
@@ -38,17 +37,19 @@ def my_view(request):
 
 
 @view_config(route_name='addpost', renderer='addpost.mako',
-    request_method='GET')
+    request_method='GET', permission="authenticated")
 def addpost_page(request):
     postform = blogpost_form_factory(BlogPost, session=DBSession())
     return dict(postform=postform)
 
 
 @view_config(route_name='addpost', renderer='addpost.mako',
-    request_method='POST')
+    request_method='POST', permission="authenticated")
 def addpost(request):
+    user = request.user.users[0]
     postform = blogpost_form_factory(BlogPost, session=DBSession(),
         request=request)
+    postform.model.user_id = user.id
     if postform.validate():
         postform.sync()
         return HTTPFound(request.route_url('home'))
