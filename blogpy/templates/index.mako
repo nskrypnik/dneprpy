@@ -45,4 +45,28 @@
 </div>
 
 
+<script type="text/template" class="post_template">
+<div class="media" data-id="{{=id}}">
+  {{ if (thumb) { }}
+  <a class="pull-left" href="#">
+    <img class="media-object img-polaroid" src="{{=thumb}}">
+  </a>
+  {{ }; }}
+  <div class="media-body">
+    <h4 class="media-heading">{{=title}}</h4>
+    <p>
+        {{=text}}
+    </p>
+
+    {{ if (author) { }}
+        <p>
+            <b>Author:</b> {{=author}}
+        </p>
+    {{ } }}
+
+  </div>
+</div>
+
+</script>
+
 </%block>

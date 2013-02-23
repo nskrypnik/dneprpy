@@ -18,6 +18,8 @@ def main(global_config, **settings):
     config.add_route('home', '/')
     config.add_route('addpost', '/addpost')
 
+    config.include('pyramid_rpc.jsonrpc')
+    config.add_jsonrpc_endpoint('api', '/api/')
     config.include('apex')
 
     config.scan()
